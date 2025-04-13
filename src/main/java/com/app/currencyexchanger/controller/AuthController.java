@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for handling authentication requests.
+ * <p>
+ * Provides an API endpoint for user login and generating JWT tokens.
+ * </p>
+ */
 @RestController
 @Tag(name = "Authentication", description = "APIs for JWT token generation and user authentication")
 public class AuthController {
@@ -21,6 +27,12 @@ public class AuthController {
   private final AuthenticationManager authenticationManager;
   private final UserDetailsService userDetailsService;
 
+  /**
+   * Constructor for AuthController.
+   *
+   * @param authenticationManager the authentication manager for authenticating users
+   * @param userDetailsService    the user details service to load user information
+   */
   public AuthController(
       AuthenticationManager authenticationManager, UserDetailsService userDetailsService
   ) {
@@ -28,6 +40,16 @@ public class AuthController {
     this.userDetailsService = userDetailsService;
   }
 
+  /**
+   * API endpoint for user login.
+   * <p>
+   * Authenticates a user with the provided credentials and generates a JWT token upon successful
+   * authentication.
+   * </p>
+   *
+   * @param request the user login request containing username and password
+   * @return a JWT response containing the generated token
+   */
   @PostMapping(LOGIN_URL)
   public JwtResponse login(@RequestBody UserLoginRequest request) {
     authenticationManager.authenticate(

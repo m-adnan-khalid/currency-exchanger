@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Implementation of the BillService interface. Provides the logic for calculating the net payable
+ * amount for a bill, applying discounts based on user roles, and converting currency if needed.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

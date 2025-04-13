@@ -7,11 +7,16 @@ import com.app.currencyexchanger.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
+/**
+ * Utility class for retrieving the currently authenticated user from the Spring Security context.
+ * <p>
+ * This class helps extract user information, including username and role, from the security
+ * context.
+ */
 public class SecurityUtil {
 
   private SecurityUtil() {
-
+    // Private constructor to prevent instantiation of this utility class.
   }
 
   public static User getCurrentUser() {

@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for handling billing-related operations.
+ * <p>
+ * Provides an API endpoint to calculate the net payable amount for a given bill request.
+ * </p>
+ */
 @RestController
 @Tag(name = "Bill Management", description = "APIs for managing billing operations")
 @SecurityRequirement(name = "Authorization")
@@ -25,10 +31,26 @@ public class BillController {
 
   private final BillService billService;
 
+  /**
+   * Constructor for BillController.
+   *
+   * @param billService the bill service for calculating bill-related operations
+   */
   public BillController(BillService billService) {
     this.billService = billService;
   }
 
+  /**
+   * API endpoint to calculate the net payable amount for a bill request.
+   * <p>
+   * This endpoint processes a bill request, calculates the net payable amount, and returns the
+   * response.
+   * </p>
+   *
+   * @param request the bill request containing details of the bill
+   * @return a {@link ResponseEntity} containing the calculated bill response with the net payable
+   * amount
+   */
   @PostMapping(value = CALCULATE_BILL_URL)
   public ResponseEntity<BillResponse> calculate(@RequestBody BillRequest request) {
     String sanitizeRequest = sanitizeForLogging(request);

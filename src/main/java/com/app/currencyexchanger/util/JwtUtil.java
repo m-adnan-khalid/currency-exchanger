@@ -9,10 +9,22 @@ import java.security.Key;
 import java.util.Date;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * Utility class for managing JSON Web Tokens (JWT) used in authentication.
+ * <p>
+ * Responsibilities:
+ * <ul>
+ *   <li>Generate JWT tokens with username as subject</li>
+ *   <li>Validate tokens based on expiration and username</li>
+ *   <li>Extract claims like username from tokens</li>
+ * </ul>
+ *
+ * This class uses the io.jsonwebtoken (jjwt) library.
+ */
 public class JwtUtil {
 
   private JwtUtil() {
-
+    //Private constructor to prevent instantiation of this utility class.
   }
 
   private static final String SECRET_KEY = "your-256-bit-secret-which-should-be-long-enough-to-meet-HMAC-256-standards";

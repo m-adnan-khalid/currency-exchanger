@@ -28,8 +28,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+/**
+ * Configuration class for setting up Spring Security.
+ * <p>
+ * Defines user details, password encoding, JWT authentication, and access control rules.
+ */
 public class SecurityConfig {
 
+  /**
+   * Defines in-memory user details for EMPLOYEE, AFFILIATE, and CUSTOMER roles.
+   *
+   * @return a {@link UserDetailsService} bean with predefined users and encoded passwords
+   */
   @Bean
   public UserDetailsService userDetailsService() {
     return new InMemoryUserDetailsManager(
@@ -48,6 +58,14 @@ public class SecurityConfig {
     );
   }
 
+  /**
+   * Configures the security filter chain with JWT authentication and endpoint access control.
+   *
+   * @param http                    the {@link HttpSecurity} to modify
+   * @param jwtAuthenticationFilter custom JWT filter to validate tokens
+   * @return the configured {@link SecurityFilterChain}
+   * @throws Exception if an error occurs during configuration
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http,
       JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
@@ -69,11 +87,23 @@ public class SecurityConfig {
         .build();
   }
 
+  /**
+   * Provides a password encoder using BCrypt hashing algorithm.
+   *
+   * @return a {@link PasswordEncoder} bean
+   */
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
+  /**
+   * Provides an {@link AuthenticationManager} for use in authentication processes.
+   *
+   * @param config the {@link AuthenticationConfiguration} to extract the manager from
+   * @return the authentication manager
+   * @throws Exception if retrieval fails
+   */
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
       throws Exception {

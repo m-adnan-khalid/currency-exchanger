@@ -12,6 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
+/**
+ * A provider that integrates with the ExchangeRate-API to get exchange rates.
+ * <p>
+ * This class implements the CurrencyExchangeProvider interface and fetches exchange rates by
+ * calling the ExchangeRate-API, given an amount and currency pair.
+ */
 @Component
 public class ExchangeRateApiProvider implements CurrencyExchangeProvider {
 
@@ -29,6 +35,15 @@ public class ExchangeRateApiProvider implements CurrencyExchangeProvider {
     this.restClient = restClient;
   }
 
+  /**
+   * Fetches the exchange rate between two currencies for a given amount.
+   *
+   * @param amount       the amount to convert
+   * @param fromCurrency the currency to convert from
+   * @param toCurrency   the currency to convert to
+   * @return the exchange rate for the specified amount and currency pair
+   * @throws InternalServerException if the API call fails or returns an invalid response
+   */
   @Override
   public double getExchangeRate(BigDecimal amount, String fromCurrency, String toCurrency) {
     String url = String.format("%s/%s/pair/%s/%s/%s",
@@ -55,6 +70,11 @@ public class ExchangeRateApiProvider implements CurrencyExchangeProvider {
     }
   }
 
+  /**
+   * Returns the name of the exchange rate provider.
+   *
+   * @return the provider name, in this case "exchangerateapi"
+   */
   @Override
   public String getProviderName() {
     return "exchangerateapi";
