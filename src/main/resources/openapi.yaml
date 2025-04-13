@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: Currency Exchange and Discount API
+  description: API for calculating currency exchange and applying discounts
+  version: 1.0.0
+paths:
+  /calculate-bill:
+    post:
+      summary: Calculate Net Payable
+      description: Calculates the total bill amount by applying necessary discounts and currency exchange rates.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillRequest'
+      responses:
+        '200':
+          description: Bill calculated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillResponse'
+        '400':
+          description: Invalid request data
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    BillRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+    BillResponse:
+      type: object
+      properties:
+        totalAmount:
+          type: number
+          format: float
